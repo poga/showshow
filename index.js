@@ -5,7 +5,6 @@ const puppeteer = require('puppeteer')
 const devices = require('puppeteer/DeviceDescriptors')
 const op = require('openport')
 
-let wait = ms => new Promise(resolve => setTimeout(resolve, ms))
 let findPort = () => new Promise((resolve, reject) => {
   op.find(function (err, port) {
     if (err) return reject(err)
@@ -35,7 +34,6 @@ async function screenshot (url, path) {
   const page = await b.newPage()
   await page.emulate(devices['iPhone 6'])
   await page.goto(url)
-  await wait(1000)
   await page.screenshot({path})
 
   b.close()
